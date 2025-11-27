@@ -1,0 +1,41 @@
+.test-details {
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  background: var(--pcolor);
+  min-height: 100vh;
+  max-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.test-details .test-section {
+  overflow: auto;
+  text-align: center;
+  scrollbar-width: thin;
+}
+
+.test-section-header hr {
+  background-color: var(--scolor);
+  height: 0.5px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 5%;
+}
+.result-input {
+  border: none;
+  max-width: 150px;
+  max-height: 100px;
+  background-color: var(--pcolor);
+  border-radius: 8px;
+  text-align: center;
+  align-content: center;
+  text-transform: uppercase;
+  color: var(--hcolor);
+  font-family: 'poppins';
+}
+.result-input:focus {
+  border: 0.5px solid var(--scolor);
+}

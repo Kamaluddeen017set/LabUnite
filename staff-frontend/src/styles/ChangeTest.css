@@ -1,0 +1,12 @@
+.change-test {
+  justify-self: center;
+  margin-left: 30%;
+}
+.change-test .add-new-test {
+  justify-self: right;
+  max-width: 300px;
+}
+
+.change-test .add-new-test .combobox-list {
+  padding-right: 9px;
+}

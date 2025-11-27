@@ -1,0 +1,145 @@
+.add-patient-form {
+  width: 40%;
+  max-width: 50%;
+  position: absolute;
+  justify-self: center;
+  background: var(--tcolor);
+  padding: 50px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  z-index: 1;
+  display: grid;
+  border: 0.5px solid var(--scolor);
+}
+.add-patient-form .input_label {
+  padding-right: 5px;
+}
+.add-patient-form input {
+  background-color: var(--tcolor);
+  width: 96%;
+}
+.add-patient-form input:focus {
+  background-color: #fff;
+}
+.add-patient-form h3 {
+  text-transform: uppercase;
+  color: var(--scolor);
+  text-align: center;
+  font-family: 'poppins';
+}
+.add-patient-form label {
+  font-family: 'poppins';
+  font-size: 1rem;
+}
+.btn {
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  color: var(--tcolor);
+  background-color: var(--scolor);
+  transition: 0.7s ease;
+  margin-top: 30px;
+  font-size: 1rem;
+}
+.btn:hover {
+  transform: translateY(-4px);
+  background-color: var(--hcolor);
+  opacity: 90%;
+}
+.create-menu {
+  color: var(--scolor);
+  font-weight: bold;
+  font-size: 1rem;
+  justify-self: right;
+  cursor: pointer;
+  transition: 0.7s ease;
+}
+.create-menu:hover {
+  color: red;
+  font-weight: bolder;
+  transform: translateY(-2px);
+}
+.age-gender input {
+  margin-right: 10px;
+}
+.age-gender select {
+  background-color: var(--tcolor);
+  padding: 10px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0.5px solid #ddd;
+}
+.age-gender select:focus {
+  background-color: #fff;
+}
+.age-gender select option {
+  border: 0.5px solid #ddd;
+  text-transform: capitalize;
+}
+.combobox-item.highlighted {
+  background: #dfe9ff;
+  font-weight: bold;
+}
+.combobox {
+  position: relative;
+  width: 100%;
+}
+
+.combobox-input {
+  width: 96%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  outline: none;
+  color: var(--hcolor);
+}
+
+.combobox-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 4px rgba(80, 150, 255, 0.4);
+}
+
+.combobox-list {
+  position: relative;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 250px;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  border-radius: 0 0 6px 6px;
+  z-index: 20;
+  padding: 0;
+  color: var(--hcolor);
+}
+
+.combobox-category {
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+  padding: 8px 10px;
+  background: #f4f6fc;
+  border-bottom: 1px solid #eee;
+  text-transform: uppercase;
+}
+
+.combobox-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.combobox-item:hover {
+  background: #f0f5ff;
+}
+
+.combobox-empty {
+  padding: 10px;
+  text-align: center;
+  color: #999;
+}

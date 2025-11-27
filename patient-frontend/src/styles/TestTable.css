@@ -1,0 +1,179 @@
+.patient-test-table-container {
+  width: 84%;
+  max-width: 100%;
+  margin-left: 14%;
+  margin-top: 20px;
+  background-color: var(--pcolor);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 80, 150, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-title {
+  text-align: left;
+  color: #003366;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.table-wrapper {
+  max-height: 500px;
+  scrollbar-width: thin;
+  overflow: auto;
+}
+
+.patient-test-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--tcolor);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 80, 150, 0.05);
+}
+
+.patient-test-table th,
+.patient-test-table td {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #333;
+}
+
+.patient-test-table th {
+  background-color: #eaf3fb;
+  color: var(--hcolor);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.patient-test-table tbody tr {
+  text-transform: capitalize;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.patient-test-table tbody tr:hover {
+  background-color: #f0f7ff;
+  transform: scale(1.01);
+}
+
+.completed,
+.pending,
+.in-progress,
+.failed {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.completed {
+  background-color: #28a745;
+}
+
+.pending {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.in-progress {
+  background-color: #007bff;
+}
+
+.failed {
+  background-color: #dc3545;
+}
+
+.view-btn,
+.log-out {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.view-btn:hover,
+.log-out:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 91, 187, 0.2);
+}
+.not-found {
+  text-align: center;
+  padding: 50px;
+  color: var(--hcolor);
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.filter {
+  float: center;
+  display: flex;
+  justify-self: center;
+  margin-right: 20px;
+  padding: 12px 20px;
+  margin-top: -70px;
+  gap: 5px;
+  max-width: 500px;
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.filter:hover {
+  transform: translateY(-2px);
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a237e;
+  margin-top: 15px;
+  width: 100%;
+  text-transform: uppercase;
+}
+.status-filter {
+  margin-top: 6px;
+  padding: 10px 14px;
+  width: 100%;
+  border: 1.5px solid #c5cae9;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f8f9ff;
+  font-size: 0.95rem;
+  color: #1a237e;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+.table-animate {
+  animation: fadeSlideQuick 0.4s ease-in-out;
+}
+
+@keyframes fadeSlideQuick {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .patient-test-table th,
+  .patient-test-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .view-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

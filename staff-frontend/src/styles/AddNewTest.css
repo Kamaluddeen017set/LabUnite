@@ -1,0 +1,68 @@
+.add-new-test {
+  width: 30%;
+  max-width: 50%;
+  position: absolute;
+  top: 100px;
+  justify-self: center;
+  background: var(--tcolor);
+  padding: 50px;
+  border: 0.5px solid var(--scolor);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1;
+}
+.add-new-test h2 {
+  font-size: 1.3rem;
+
+  margin-bottom: 20px;
+  color: var(--scolor);
+  text-transform: uppercase;
+  font-family: 'poppins';
+  opacity: 80%;
+}
+.add-new-test label {
+  font-size: 1rem;
+  color: #333333bc;
+  font-family: 'poppins';
+}
+.add-new-test form {
+  text-align: left;
+}
+
+.add-new-test button {
+  width: 100%;
+}
+
+.selected-tests {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  background: #e8f0fe;
+  padding: 6px 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.remove-chip {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--scolor);
+}
+.create-menu {
+  color: var(--scolor);
+  font-weight: bold;
+  font-size: 1rem;
+  justify-self: right;
+  cursor: pointer;
+  transition: 0.7s ease;
+}
+.create-menu:hover {
+  color: red;
+  font-weight: bolder;
+  transform: translateY(-2px);
+}

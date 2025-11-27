@@ -1,0 +1,253 @@
+/* GLOBAL PAGE */
+
+.patient-page {
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  background: var(--pcolor);
+  min-height: 100vh;
+  max-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* ANIMATIONS */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.row-animate {
+  animation: rowFade 0.4s ease forwards;
+}
+
+@keyframes rowFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* LEFT SIDE CARD */
+.patient-info-card {
+  width: 30%;
+  background: var(--tcolor);
+  padding: 25px;
+
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.back-home-btn {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  left: 30px;
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.back-home-btn:hover {
+  color: #1d4ed8;
+  transform: translateX(-3px);
+}
+
+.patient-photo img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 4px solid #dfe6f1;
+  transition: transform 0.3s ease;
+}
+
+.patient-photo img:hover {
+  transform: scale(1.05);
+}
+
+.patient-name {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--hcolor);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  text-align: left;
+}
+
+.label {
+  color: #6b7a8f;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.value {
+  color: var(--hcolor);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* RIGHT SIDE SECTION */
+.test-section {
+  width: 70%;
+  background: var(--tcolor);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+  text-transform: capitalize;
+  color: var(--hcolor);
+}
+
+.test-section:hover {
+  transform: translateY(-4px);
+}
+
+.test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-test-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #2563eb;
+  color: var(--tcolor);
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-test-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* TABLE */
+.test-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table {
+  max-height: 82vh;
+  scrollbar-width: thin;
+  overflow: auto;
+}
+
+.test-table th,
+.test-table td {
+  padding: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+}
+
+.test-table tr:hover {
+  background: #f1f5f9;
+  transition: background 0.3s ease;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--tcolor);
+  text-transform: capitalize;
+  transition: transform 0.3s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+/* STATUS COLORS */
+.status-badge.pending {
+  background: #fbbf24;
+}
+
+/* .status-badge["in progress"] {
+  background: #3b82f6;
+} */
+
+.status-badge.completed {
+  background: #10b981;
+}
+
+.status-badge.failed {
+  background: #ef4444;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 900px) {
+  .patient-page {
+    flex-direction: column;
+  }
+
+  .patient-info-card,
+  .test-section {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .test-table th,
+  .test-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-photo img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .add-test-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}

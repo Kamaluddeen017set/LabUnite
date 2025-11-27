@@ -1,0 +1,191 @@
+.profile-card {
+  height: 100vh;
+  width: 87%;
+  background: var(--pcolor);
+  max-width: 100%;
+}
+.profile-header {
+  display: flex;
+}
+
+.left {
+  background: var(--tcolor);
+  margin: 2%;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  max-width: 50%;
+  height: 650px;
+}
+.left h1 {
+  text-transform: capitalize;
+  font-size: 1.7rem;
+  text-align: center;
+  color: var(--hcolor);
+}
+.left h2 {
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #444;
+}
+.profile-div {
+  width: 200px;
+
+  justify-self: center;
+  margin-top: -48.5%;
+}
+
+.profileCardImage {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.profile-menu {
+  margin-top: 10%;
+}
+.profile-menu ul {
+  list-style: none;
+}
+.profile-menu ul li a {
+  margin: 10px 90px;
+  transition: 0.4s ease-in-out;
+  font-size: 1.2rem;
+  color: #444;
+  padding: 10px;
+  border-radius: 0 20px 20px 20px;
+  text-decoration: none;
+}
+.profile-menu ul li a:hover {
+  color: var(--hcolor);
+  border: 0.5px solid var(--scolor);
+  transform: translateY(2px);
+}
+
+.right {
+  background: var(--tcolor);
+  margin: 2%;
+  width: 62%;
+  height: 650px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.patient-details ul {
+  list-style: none;
+  display: flex;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+}
+.patient-details ul li {
+  margin-top: 50px;
+  display: inline;
+  font-size: 1rem;
+  text-transform: capitalize;
+  color: var(--hcolor);
+}
+.patient-details ul li input {
+  width: 100%;
+  max-width: 90%;
+  height: 40px;
+  color: var(--scolor);
+  padding-left: 20px;
+  padding: 5px;
+  text-transform: capitalize;
+  border: 1.5px solid #c5cae9;
+  border-radius: 5px;
+  outline: none;
+  background: #f8f9ff;
+  font-size: 0.95rem;
+  color: #1a237e;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.patient-details ul li input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.15);
+  background: #fff;
+}
+
+.patient-details ul li input ::placeholder {
+  color: #9fa8da;
+
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.gender {
+  padding: 12px 20px;
+  border-radius: 5px;
+  background-color: #f8f9ff;
+  gap: 5px;
+  max-width: 500px;
+  border-color: #3f51b5;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.filter:hover {
+  transform: translateY(-2px);
+}
+
+.edit-profile {
+  padding: 15px 30px;
+  border-radius: 5px;
+  border: none;
+  background: var(--scolor);
+  color: var(--tcolor);
+  box-shadow: var(--shadow);
+  margin-right: 40%;
+  margin-left: 40%;
+  opacity: 80%;
+  transition: 0.5s ease-in-out;
+}
+.edit-profile:hover {
+  opacity: 100%;
+  transform: translateY(2px);
+}
+.password-setting {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 260px;
+}
+.password-setting h2 {
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+  color: var(--hcolor);
+}
+.password-setting label {
+  color: var(--scolor);
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+.password-setting input {
+  /* width: 350px; */
+  height: 41px;
+  background: #f8f9ff;
+  border-radius: 5px;
+}
+.password-setting .input_container {
+  margin-bottom: 25px;
+}
+.password-setting input:focus {
+  background: #fff;
+}
+.set-btn {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  max-width: 91.5%;
+  background: var(--scolor);
+  border: none;
+  box-shadow: var(--shadow);
+  transition: 0.3s ease-in-out;
+  color: var(--tcolor);
+  text-transform: capitalize;
+  font-size: 1rem;
+  margin-left: 12px;
+}
+.set-btn:hover {
+  transform: translateY(5px);
+}
