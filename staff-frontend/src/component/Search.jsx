@@ -1,6 +1,6 @@
 import '../styles/Search.css';
 
-export default function Search({ query, setQuery }) {
+export default function Search({ query, setQuery, placeholder }) {
   return (
     <form className="search" onSubmit={e => e.preventDefault()}>
       <label>Search </label>
@@ -8,7 +8,7 @@ export default function Search({ query, setQuery }) {
         value={query}
         onChange={e => setQuery(e.target.value)}
         type="text"
-        placeholder="Enter Name, Phone Or Id"
+        placeholder={placeholder}
         maxLength={20}
         className="search-input"
       />

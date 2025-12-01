@@ -93,14 +93,6 @@ function UserTittle({ user }) {
 
 function ProfileMenu({ setSetting, setting }) {
   const [active, setActive] = useState('Personal Information');
-  const handleLogOut = () => {
-    setActive('Log Out');
-    if (window.confirm('Are you sure you want to log out ?')) {
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
-      window.location.href = '/';
-    }
-  };
 
   return (
     <div className="profile-menu">
@@ -126,9 +118,6 @@ function ProfileMenu({ setSetting, setting }) {
         </ProfileMenuList>
 
         <br />
-        <ProfileMenuList onclicking={handleLogOut} active={active}>
-          Log Out
-        </ProfileMenuList>
       </ul>
     </div>
   );

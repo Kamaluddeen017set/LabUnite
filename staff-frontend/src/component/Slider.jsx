@@ -14,6 +14,7 @@ import Switch from './Switch';
 import { useApp } from '../app/context/appContext';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons/faSignOut';
 export default function Slider() {
   const { setIsOpen, createPatient, isLoaded, isOpen } = useApp();
   function handleClick() {
@@ -53,6 +54,13 @@ function Logo({ isOpen }) {
 }
 
 function Menu({ isOpen }) {
+  const handleLogOut = () => {
+    if (window.confirm('Are you sure you want to log out ?')) {
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('userId');
+      window.location.href = '/';
+    }
+  };
   return (
     <div className="menu">
       <ul>
@@ -77,15 +85,30 @@ function Menu({ isOpen }) {
         <NavList path="/contact" Icon={faContactCard} isOpen={isOpen}>
           Contact
         </NavList>
+        <br />
+        <br />
+        <br />
+        <NavList
+          path="#"
+          Icon={faSignOut}
+          isOpen={isOpen}
+          handleLogOut={handleLogOut}
+        >
+          Log Out
+        </NavList>
       </ul>
     </div>
   );
 }
-function NavList({ children, isOpen, path, Icon }) {
+function NavList({ children, isOpen, path, Icon, handleLogOut }) {
   const Pathname = usePathname();
   return (
     <li>
-      <Link href={path} className={Pathname === path ? 'active' : 'unactive'}>
+      <Link
+        href={path}
+        className={Pathname === path ? 'active' : 'unactive'}
+        onClick={handleLogOut}
+      >
         <FontAwesomeIcon
           icon={Icon}
           style={
@@ -112,17 +135,3 @@ function NavList({ children, isOpen, path, Icon }) {
 function MenuIcon({ handleClick, isOpen }) {
   return <Switch handleClick={handleClick} />;
 }
-{
-  /* <> */
-}
-//   <input type="checkbox" id="checkbox" onClick={handleClick} />
-//   <label
-//     for="checkbox"
-//     class="toggle"
-//     style={{ gap: isOpen ? '10px' : '3px' }}
-//   >
-//     <div className="bars" id="bar1"></div>
-//     <div className="bars" id="bar2"></div>
-//     <div className="bars" id="bar3"></div>
-//   </label>
-// </>

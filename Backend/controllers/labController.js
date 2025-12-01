@@ -1,6 +1,7 @@
 import Lab from "../models/Lab.js";
 import Patient from "../models/Patient.js";
 import TestTemplete from "../models/TestTemplete.js";
+import Test from "../models/Test.js";
 
 //generate Code
 
@@ -21,7 +22,21 @@ async function generateUnoqueLabCode(name) {
 
   const suffix = Date.now().toString.slice(-2);
   return codeFromName + suffix;
-}
+} ///get lab patients
+export const getSingleLabPatients = async (req, res) => {
+  try {
+    const { labId } = req.params;
+
+    const patients = await Patient.find({ labId })
+      .populate("patientId", "name age gender patientId phone address")
+      .populate("labId", "name")
+      .populate("staffId", "name role");
+
+    res.status(200).json({ success: true, patients });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 export const createLab = async (req, res) => {
   try {
     const { name, email, address, phone } = req.body;
@@ -45,23 +60,27 @@ export const createLab = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-///get lab patients
-export const getSingleLabPatients = async (req, res) => {
-  try {
-    const { labId } = req.params;
 
-    const patients = await Patient.find({ labId });
-    res.status(200).json({ success: true, patients });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
 export const getSingleLabTestTempleteLists = async (req, res) => {
   try {
     const { labId } = req.params;
 
     const testTempletes = await TestTemplete.find({ labId });
     res.status(200).json({ success: true, testTempletes });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+export const getSingleLabTests = async (req, res) => {
+  try {
+    const { labId } = req.params;
+
+    const tests = await Test.find({ labId })
+      .populate("patientId", "name age gender patientId phone address")
+      .populate("labId", "name")
+      .populate("staffId", "name role");
+
+    res.status(200).json({ success: true, tests });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -7,10 +7,11 @@ import TestHistoryTable from '../component/TestHistoryTable';
 import Footer from '../component/Footer';
 import { useApp } from './context/appContext';
 import Login from '../component/Login';
+import { useState } from 'react';
 
 export default function Home() {
   const { currentUser, createPatient, token, isLoaded } = useApp();
-
+  const [generalPatients, setGeneralPatients] = useState({});
   if (!isLoaded) return <p>Loading...</p>;
 
   if (!currentUser || !token) {
@@ -23,8 +24,11 @@ export default function Home() {
       <Navber />
 
       {createPatient && <AddPatientForm />}
-      <Hero />
-      <TestHistoryTable />
+      <Hero generalPatients={generalPatients} />
+      <TestHistoryTable
+        setGeneralPatients={setGeneralPatients}
+        generalPatients={generalPatients}
+      />
       <Footer />
     </>
   );

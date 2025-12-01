@@ -3,11 +3,10 @@
   float: right;
   display: flex;
 
-  margin-right: 20px;
   padding: 12px 20px;
   margin-top: -70px;
   gap: 5px;
-  max-width: 420px;
+  max-width: 250px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -20,12 +19,12 @@
   font-size: 0.95rem;
   color: #1a237e;
   margin-top: 14px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .search-input {
   margin-top: 6px;
-  padding: 10px 14px;
+  padding: 8px 15px;
   width: 100%;
   border: 1.5px solid #c5cae9;
   border-radius: 8px;

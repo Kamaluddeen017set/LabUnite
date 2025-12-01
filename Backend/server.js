@@ -1,15 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
-
 import mongoose from "mongoose";
 import cors from "cors";
-
+import reportRoutes from "./routes/pdf.route.js";
 import userRoutes from "./routes/userRoutes.js";
 import labRoutes from "./routes/labRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
 import testTempleteRoutes from "./routes/testTempleteRoutes.js";
+import pdfRouter from "./routes/pdf.route.js";
 
 const app = express();
 const allowedOrigins = [
@@ -39,6 +39,7 @@ app.use("/api/labs", labRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/tests", testRoutes);
 app.use("/api/test-templetes", testTempleteRoutes);
+app.use("/official", pdfRouter);
 
 mongoose
   .connect(process.env.MONGO_URL)

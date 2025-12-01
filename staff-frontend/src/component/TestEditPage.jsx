@@ -198,8 +198,9 @@ function ReportTable({
         `/tests/${labId}/${testId}`,
         newTestResult
       );
-      alert('Test uploaded successfully');
-      console.log(res.data);
+
+      const url = `http://localhost:5000/official/${labId}/report/${testId}/pdf`;
+      window.open(url, '_self');
     } catch (error) {
       alert(error.responde?.data?.message);
     }

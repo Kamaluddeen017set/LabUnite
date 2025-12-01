@@ -130,7 +130,18 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+///tests
+export const getSingleLabTests = async (req, res) => {
+  try {
+    const { labId } = req.params;
 
+    const tests = await Test.find({ labId });
+
+    res.status(200).json({ success: true, tests });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 ///passwoed update
 export const updatePassword = async (req, res) => {
   try {

@@ -47,6 +47,10 @@ export default function PatientPage({ openModel, setModel }) {
 
 function PatientTestSection({ patientDetails, setModel }) {
   console.log(patientDetails);
+  const handleViewPdf = (labId, id) => {
+    const url = `http://localhost:5000/official/${labId}/report/${id}/pdf`;
+    window.open(url, '_self');
+  };
   return (
     <div className="test-section">
       <div className="test-header">
@@ -67,50 +71,49 @@ function PatientTestSection({ patientDetails, setModel }) {
               <th>Action</th>
             </tr>
           </thead>
-
           <tbody>
-            {console.log(patientDetails.tests)}
+            {console.log('hereee')}
             {patientDetails.tests?.length > 0 ? (
-              [...patientDetails.tests.reverse()].map(test => (
-                <tr key={test.testId}>
-                  <td>{test.testId}</td>
-                  <td>{test.testName}</td>
-                  <td>
-                    <span
-                      className={`status- badge${test.status?.toLowerCase()}`}
-                    >
-                      {test.status}
-                    </span>
-                  </td>
-                  <td>{test.createdAt}</td>
-                  <td>{test.result}</td>
-                  <td>
-                    {test.status === 'pending' && (
-                      <button
-                        className="view-btn"
-                        onClick={() =>
-                          (window.location.href = `/test/${test._id}`)
-                        }
+              patientDetails.tests
+                .reduce((acc, curr) => [curr, ...acc], [])
+                .map(test => (
+                  <tr key={test.testId}>
+                    <td>{test.testId}</td>
+                    <td>{test.testName}</td>
+                    <td>
+                      <span
+                        className={`status- badge${test.status?.toLowerCase()}`}
                       >
-                        Upload result
-                      </button>
-                    )}
-                    {test.status === 'completed' && (
-                      <button
-                        className="view-btn"
-                        onClick={() =>
-                          (window.location.href = `/test/${test._id}`)
-                        }
-                        style={{
-                          background: 'green',
-                        }}
-                      >
-                        View Result
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))
+                        {test.status}
+                      </span>
+                    </td>
+                    <td>{test.createdAt}</td>
+                    <td>{test.result}</td>
+                    <td>
+                      {test.status === 'pending' && (
+                        <button
+                          className="view-btn"
+                          onClick={() =>
+                            (window.location.href = `/test/${test._id}`)
+                          }
+                        >
+                          Upload result
+                        </button>
+                      )}
+                      {test.status === 'completed' && (
+                        <button
+                          className="view-btn"
+                          onClick={() => handleViewPdf(test.labId, test._id)}
+                          style={{
+                            background: 'green',
+                          }}
+                        >
+                          View Result
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
             ) : (
               <tr>
                 <td colSpan="2">No test found</td>

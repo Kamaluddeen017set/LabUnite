@@ -1,7 +1,11 @@
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useApp } from '../app/context/appContext';
-export default function Hero() {
+import { useEffect, useState } from 'react';
+import axiosInstance from '../axiosInstance';
+export default function Hero({ generalPatients }) {
+  const [loading, setLoading] = useState(true);
+  const [generalTests, setGeneralTests] = useState([]);
   const { currentUser, createPatient, setCreatePatient, isLoaded, isOpen } =
     useApp();
   const user = currentUser;
@@ -11,13 +15,45 @@ export default function Hero() {
     marginLeft: isOpen ? '10%' : '5.5%',
     filter: createPatient ? 'blur(3px)' : 'none',
   };
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      const labId = currentUser.labId._id;
+      console.log('isddd', labId);
+      try {
+        const res = await axiosInstance.get(`/labs/${labId}/tests`);
+
+        setGeneralTests(res.data);
+
+        setLoading(false);
+        console.log('reesss', res.data);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+    fetchResults();
+  }, []);
+  if (!generalPatients.patients || loading) return <p>loading..</p>;
   return (
     <div className="hero" style={layoutstyle}>
-      <RecentTest test={user.tests} setCreatePatient={setCreatePatient} />
+      {console.log('general p', generalPatients)}
+      <RecentTest
+        generalPatients={generalPatients}
+        setCreatePatient={setCreatePatient}
+        generalTests={generalTests}
+      />
     </div>
   );
 }
-function RecentTest({ test, setCreatePatient }) {
+function RecentTest({ generalPatients, setCreatePatient, generalTests }) {
+  console.log('tesssss', generalTests);
+  const numOfAllPatients = generalPatients.patients.length;
+  const numOfAllTests = generalTests.tests.length;
+  const pendingTests = generalTests.tests.filter(
+    pending => pending.status === 'pending'
+  ).length;
+
   const date = localStorage.getItem('lastUpdate');
 
   // const pendingTest = test.filter(
@@ -27,21 +63,22 @@ function RecentTest({ test, setCreatePatient }) {
   // const completedTest = test.filter(
   //   completed => completed.status === 'completed'
   // ).length;
+
   return (
     <div className="recent-test">
       <TestDone className="total-test-done">
         <h2>
-          <span>XX test</span> Total Test
+          <span>{numOfAllPatients}</span> Total Patients
         </h2>
       </TestDone>
       <TestDone className="pending-test">
         <h2>
-          <span>XXX test</span> Pending Test
+          <span>{numOfAllTests}</span> Total Tests
         </h2>
       </TestDone>{' '}
       <TestDone className="pending-test">
         <h2>
-          <span>XXX test</span> Completed Test
+          <span>{pendingTests}</span> pending Tests
         </h2>
       </TestDone>
       <TestDone className="last-update-date">

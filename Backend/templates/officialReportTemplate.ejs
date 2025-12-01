@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: arial, sans-serif;
+        padding: 20px;
+        color: #333;
+      }
+      .top {
+        position: fixed;
+        top: 5px;
+        width: 100%;
+        text-align: right;
+        right: 20px;
+        font-size: 12px;
+        color: #777;
+        opacity: 70%;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        border-bottom: 3px solid #01578b;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .header img {
+        height: 100px;
+        margin-right: 20px;
+      }
+      .header h2 {
+        position: absolute;
+        font-size: 1rem;
+        text-align: right;
+
+        right: 20px;
+      }
+      .lab-info {
+        width: 100%;
+        font-size: 15px;
+      }
+      .lab-info b {
+        width: 100;
+        justify-self: center;
+
+        color: #01578b;
+        font-weight: bold;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+      }
+      .title {
+        background: #01578b;
+        color: white;
+        padding: 8px;
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border-radius: 4px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        font-size: 13px;
+      }
+      .footer {
+        position: fixed;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+      }
+      .patient-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .patient-info table,
+      .patient-info td,
+      .patient-info th {
+        border: none;
+        text-align: left;
+        padding: 2px;
+      }
+      .signature {
+        margin-top: 70px;
+        width: 100%;
+        text-align: center;
+      }
+      .signature h3 {
+        color: #01578b;
+        margin-top: -10px;
+        text-align: left;
+        padding-left: 25px;
+      }
+      .signature p {
+        justify-self: left;
+        font-size: 14px;
+        margin-top: 5px;
+        color: #333;
+        text-transform: capitalize;
+
+        width: 180px;
+        border-bottom: 1px solid #01578b;
+      }
+      .note {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        min-height: 100px;
+        margin-top: 20px;
+      }
+      .note h3 {
+        color: #01578b;
+        padding-left: 10px;
+        border-bottom: 0.5px solid #01578b;
+      }
+      .text-area {
+        padding: 10px;
+        color: #333;
+        word-spacing: normal;
+        font-size: auto;
+      }
+      .qrcode {
+        justify-self: right;
+        margin-top: -100px;
+      }
+      .qrcode img {
+        width: 100px;
+        height: 100px;
+      }
+      .qrcode p {
+        font-size: 12px;
+        text-align: center;
+      }
+      .footer img {
+        height: 70px;
+        margin-right: 20px;
+      }
+    </style>
+    <title><%= report.patientId.name %>'s Laboratory Report</title>
+  </head>
+  <body>
+    <div class="top">Powered by LabUnite -Laboratory Information System</div>
+    <div class="header">
+      <% if (lab.logo) {%>
+      <img src="<%= lab.logo %>" />
+      <%}%>
+
+      <div class="lab-info">
+        <b><%= lab.name %></b><br />
+        <%= lab.address %><br />
+        <%= lab.email %> <br />
+        <%= lab.phone %><br />
+      </div>
+      <h2>Test Id <span><%= report.testId %></span></h2>
+    </div>
+    <div class="title">Laboratory Test Results</div>
+    <h3>Patient Information</h3>
+    <div class="patient-info">
+      <table>
+        <tr>
+          <th>Name</th>
+          <td><%= report.patientId.name %></td>
+        </tr>
+
+        <tr>
+          <th>Phone</th>
+          <td>+<%= report.patientId.phone %></td>
+        </tr>
+
+        <tr>
+          <th>Gender</th>
+          <td><%= report.patientId.gender %></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>PatienntId</th>
+          <td><%= report.patientId.patientId %></td>
+        </tr>
+        <tr>
+          <th>Age</th>
+          <td><%= report.patientId.age %></td>
+        </tr>
+        <tr>
+          <th>Sample Type</th>
+          <td>Blood/Serum</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>TestId</th>
+          <td><%= report.testId %></td>
+        </tr>
+        <tr>
+          <th>Date</th>
+          <td><%= report.createdAt %></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="title"><%=report.testName %></div>
+    <table>
+      <tr>
+        <th>Test</th>
+        <th>Result</th>
+        <th>Nomal Range</th>
+        <th>Unit</th>
+      </tr>
+      <% if (report.testType==="single"){%>
+      <tr>
+        <td><%= report.testName %></td>
+        <td><%= report.singleResult %></td>
+        <td><%= report.singleReferenceRange %></td>
+        <td><%= report.singleUnit %></td>
+      </tr>
+      <%}else if(report.testType==="complex"){ %> <%
+      report.parameters.forEach(t=>{%>
+      <tr>
+        <td><%= t.parameter %></td>
+        <td><%= t.result %></td>
+        <td><%= t.referenceRange %></td>
+        <td><%= t.unit %></td>
+      </tr>
+      <% })%> <% }%>
+    </table>
+
+    <div class="note">
+      <h3>Comment</h3>
+      <div class="text-area"><%= report.none || "No Comment" %></div>
+    </div>
+
+    <div class="signature">
+      <p><i><%=report.staffId.name%></i></p>
+      <% if(report.staffId.role==="lab_technician"){ %>
+      <h3>Lab Technician</h3>
+      <%}else if(report.role==="lab_scientist"){ %>
+      <h3>Lab Scientist</h3>
+      <% }%>
+    </div>
+    <div class="qrcode">
+      <img src="<%= qrCodeBase64%>" alt="QR Code" />
+      <p>Scan to verify</p>
+    </div>
+
+    <div class="footer"></div>
+  </body>
+</html>
