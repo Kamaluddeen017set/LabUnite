@@ -59,7 +59,7 @@ const TestHistoryTable = function ({ setGeneralPatients, generalPatients }) {
 function GeneralPatients({ query, setQuery, layoutstyle, filtered }) {
   return (
     <div className="patient-test-table-container" style={layoutstyle}>
-      <h2 className="table-title">Patients List</h2>
+      <h2 className="table-title"> General Patients </h2>
 
       <Search
         query={query}
@@ -131,7 +131,7 @@ function GeneralLabTest({ generalTest }) {
 
   return (
     <div className="test-list">
-      <h2 className="table-title">Request List</h2>
+      <h2 className="table-title">General Request </h2>
       <Search
         query={testQuery}
         setQuery={setTestQuery}
