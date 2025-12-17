@@ -4,6 +4,7 @@ import auth from "../middleware/auth.js";
 import {
   createLab,
   getSingleLabPatients,
+  getSingleLabStaff,
   getSingleLabTests,
   getSingleLabTestTempleteLists,
 } from "../controllers/labController.js";
@@ -26,6 +27,7 @@ router.get(
   auth(["SuperAdmin", "admin", "lab_technician", "lab_scientist"]),
   getSingleLabPatients
 );
+router.get("/:labId/staffs", auth(["SuperAdmin", "admin"]), getSingleLabStaff);
 router.get(
   "/:labId/tests",
   auth(["SuperAdmin", "admin", "lab_technician", "lab_scientist"]),
@@ -36,4 +38,5 @@ router.get(
   auth(["SuperAdmin", "admin", "lab_technician", "lab_scientist"]),
   getSingleLabTestTempleteLists
 );
+
 export default router;

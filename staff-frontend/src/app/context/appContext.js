@@ -28,11 +28,17 @@ export function AppProvider({ children }) {
         }
 
         const res = await axiosInstance.get(`/users/${userId}`);
+        if (
+          res.data.role === 'lab_technician' ||
+          res.data.role === 'lab_scientist'
+        ) {
+          setCurrentUser(res.data);
+          const date = new Date();
 
-        setCurrentUser(res.data);
-        const date = new Date();
-
-        localStorage.setItem('lastUpdate', date);
+          localStorage.setItem('lastUpdate', date);
+        } else {
+          alert('invalid user');
+        }
       } catch (error) {
         console.error(error);
       } finally {

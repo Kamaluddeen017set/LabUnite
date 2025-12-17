@@ -1,4 +1,5 @@
 import Lab from "../models/Lab.js";
+import User from "../models/User.js";
 import Patient from "../models/Patient.js";
 import TestTemplete from "../models/TestTemplete.js";
 import Test from "../models/Test.js";
@@ -30,7 +31,8 @@ export const getSingleLabPatients = async (req, res) => {
     const patients = await Patient.find({ labId })
       .populate("patientId", "name age gender patientId phone address")
       .populate("labId", "name")
-      .populate("staffId", "name role");
+      .populate("staffId", "name role")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({ success: true, patients });
   } catch (error) {
@@ -78,9 +80,24 @@ export const getSingleLabTests = async (req, res) => {
     const tests = await Test.find({ labId })
       .populate("patientId", "name age gender patientId phone address")
       .populate("labId", "name")
-      .populate("staffId", "name role");
+      .populate("staffId", "name role")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({ success: true, tests });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+///lab stafff
+export const getSingleLabStaff = async (req, res) => {
+  try {
+    const { labId } = req.params;
+
+    const staffs = await User.find({ labId })
+      .populate("labId", "name")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ success: true, staffs });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

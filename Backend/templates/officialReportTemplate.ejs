@@ -70,6 +70,7 @@
       th,
       td {
         border: 1px solid #ccc;
+        text-align: center;
       }
 
       th,
@@ -226,16 +227,16 @@
       <tr>
         <td><%= report.testName %></td>
         <td><%= report.singleResult %></td>
-        <td><%= report.singleReferenceRange %></td>
-        <td><%= report.singleUnit %></td>
+        <td><%= report.singleReferenceRange || '-' %></td>
+        <td><%= report.singleUnit || '-'%></td>
       </tr>
       <%}else if(report.testType==="complex"){ %> <%
       report.parameters.forEach(t=>{%>
       <tr>
         <td><%= t.parameter %></td>
         <td><%= t.result %></td>
-        <td><%= t.referenceRange %></td>
-        <td><%= t.unit %></td>
+        <td><%= t.referenceRange || '-'%></td>
+        <td><%= t.unit || '-' %></td>
       </tr>
       <% })%> <% }%>
     </table>
@@ -249,7 +250,7 @@
       <p><i><%=report.staffId.name%></i></p>
       <% if(report.staffId.role==="lab_technician"){ %>
       <h3>Lab Technician</h3>
-      <%}else if(report.role==="lab_scientist"){ %>
+      <%}else if(report.staffId.role==="lab_scientist"){ %>
       <h3>Lab Scientist</h3>
       <% }%>
     </div>

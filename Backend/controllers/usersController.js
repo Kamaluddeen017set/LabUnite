@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Patient from "../models/Patient.js";
+import { logActivity } from "../middleware/activityLogger.js";
+import Lab from "../models/Lab.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -16,9 +18,19 @@ export const registerUser = async (req, res) => {
     if (exitingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
+
+    const lab = await Lab.findById(labId);
+
+    lab.staffCounter += 1;
+    await lab.save();
+
+    //staff id
+    const sequence = String(lab.staffCounter).padStart(4, "0");
+    const StaffId = `${lab.code}-S${sequence}`;
     const user = await User.create({
       name,
       email,
+      StaffId,
       password,
       role,
       labId,
@@ -35,6 +47,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     //superADmin
+    console.log(req.body);
     if (email === process.env.SUPER_ADMIN_EMAIL) {
       if (password === process.env.SUPER_ADMIN_PASSWORD) {
         const token = jwt.sign(
@@ -42,18 +55,19 @@ export const loginUser = async (req, res) => {
           process.env.JWT_SECRET,
           { expiresIn: "7d" }
         );
-        return res.json({
+        const user = {
           message: "Super admin loggeg in",
           role: "superAdmin",
-          token,
-        });
+          name: "DevKhamal",
+        };
+        res.json({ token, user });
       } else {
         return res
           .status(401)
           .json({ message: "Invalid super admin credencials" });
       }
     }
-    console.log(req.body);
+
     //normal users
     const user = await User.findOne({ email }).populate("labId", "name");
 
@@ -70,6 +84,8 @@ export const loginUser = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+    await logActivity(user._id, user.labId, "Logged in");
+
     res.json({ token, user });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -81,7 +97,9 @@ export const getUserDetails = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const user = await User.findById(userId).populate("labId", "name address");
+    const user = await User.findById(userId)
+      .select("-password")
+      .populate("labId", "name address");
 
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);

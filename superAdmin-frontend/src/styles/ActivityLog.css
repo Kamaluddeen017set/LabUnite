@@ -1,0 +1,28 @@
+.div7 {
+  background: var(--tcolor);
+  border-radius: 10px;
+  box-shadow: var(--shadow2);
+  padding: 15px;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+.title h2 {
+  font-size: 1rem;
+  font-family: 'poppins';
+  color: var(--hcolor);
+  opacity: 0.7;
+}
+
+.activity-view-all {
+  font-size: 12px;
+  color: var(--scolor);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.activity-view-all:hover {
+  color: var(--hcolor);
+  transform: translateX(5px);
+}

@@ -1,0 +1,83 @@
+.dash-head {
+  padding: 10px;
+  color: var(--hcolor);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 650;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  padding-top: 70px;
+}
+.parent {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+.div2 {
+  grid-area: 3 / 1 / 5 / 3;
+}
+.div3 {
+  grid-area: 3 / 3 / 5 / 5;
+}
+.div4 {
+  grid-area: 3 / 5 / 5 / 7;
+}
+.div5 {
+  grid-area: 5 / 1 / 8 / 4;
+  transition: 0.5s ease;
+}
+.div6 {
+  grid-area: 5 / 4 / 8 / 7;
+  transition: 0.5s ease;
+}
+.div7 {
+  grid-area: 1 / 7 / 8 / 9;
+}
+.div8 {
+  position: relative;
+  grid-area: 8 / 1 / 11 / 5;
+}
+.div9 {
+  grid-area: 8 / 5 / 11 / 9;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .chart-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .chart-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.chart-card {
+  background: var(--tcolor);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: -52px;
+  box-shadow: var(--shadow2);
+}
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hcolor);
+  opacity: 0.7;
+}
+.recharts-surface {
+  cursor: pointer;
+  border: none;
+  transition: 0.5s ease;
+  z-index: 1000;
+}
+.div5:hover,
+.div6:hover {
+  transform: scale(1.05);
+}

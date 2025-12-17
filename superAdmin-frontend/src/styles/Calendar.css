@@ -1,0 +1,75 @@
+.current-month {
+  background: var(--scolor);
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 10px;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--tcolor);
+  font-size: 13px;
+}
+.arrows {
+  display: flex;
+  align-self: last baseline;
+  gap: 20px;
+  transition: 0.7s ease-in-out;
+}
+.arrows .left:hover,
+.arrows .right:hover {
+  transform: scale(1.2);
+}
+
+.current-date {
+  overflow: auto;
+  max-width: 100%;
+  scrollbar-color: var(--scolor) var(--pcolor);
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  scrollbar-width: thin;
+}
+.current-date .arrow {
+  margin-top: 18px;
+}
+.current-date .day {
+  background: var(--tcolor);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-align: center;
+  transition: 0.4s ease-in-out;
+  max-width: 200px;
+  border: 0.5px solid #4444;
+}
+.current-date .day:hover {
+  transform: scale(0.8);
+}
+.current-date .current-day {
+  background: var(--scolor);
+  color: var(--tcolor);
+}
+
+.refresh-btn {
+  background: var(--pcolor);
+  border: none;
+  padding: 5px;
+  display: block;
+  margin: 0 auto;
+
+  justify-items: flex-end;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--scolor);
+  box-shadow: 4px 4px 5px rgb(0, 0, 0, 0.1), -4px -4px 5px rgb(0, 0, 0, 0.1);
+  margin-top: 10px;
+  transition: 0.5s ease-in-out;
+}
+.refresh-btn:hover {
+  box-shadow: -4px -4px 10px rgb(0, 0, 0, 0.08),
+    inset -4px -4px 5px rgb(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}

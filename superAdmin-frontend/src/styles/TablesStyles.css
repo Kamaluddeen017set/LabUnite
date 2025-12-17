@@ -1,0 +1,192 @@
+.div8,
+.div9 {
+  padding: 20px;
+  background: var(--tcolor);
+  border-radius: 8px;
+  box-shadow: var(--shadow2);
+  transition: 0.4s ease-in-out;
+}
+.div8:hover,
+.div9:hover {
+  transform: scale(1.03);
+}
+.div8 h1,
+.div9 h1 {
+  text-transform: capitalize;
+  font-family: 'poppins';
+  color: var(--hcolor);
+  opacity: 0.8;
+  font-size: 1.4rem;
+}
+.patient-table,
+.test-table {
+  max-height: 250px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scolor) var(--tcolor);
+  overflow: auto;
+}
+
+.patient-table thead th {
+  background-color: #eaf3fb;
+  color: var(--hcolor);
+  padding: 8px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.patient-table tbody tr {
+  text-align: center;
+  text-transform: capitalize;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.view-btn {
+  background: transparent;
+  border: 1px solid var(--scolor);
+  color: var(--scolor);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: var(--scolor);
+  color: var(--tcolor);
+  transform: translateY(-2px);
+}
+
+.patient-table table,
+.test-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--tcolor);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 80, 150, 0.05);
+}
+.patient-table table th,
+.patient-table table td,
+.test-table table th,
+.test-table table td {
+  text-align: left;
+  padding: 10px 5px;
+  font-size: 12px;
+  color: #333;
+}
+.test-table table .view-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.patient-table table th,
+.test-table table th {
+  background-color: var(--scolor);
+  color: var(--tcolor);
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+.patient-table table th:first-child,
+.test-table table th:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.patient-table table th:last-child,
+.test-table table th:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.table-title {
+  text-align: left;
+  color: #003366;
+  margin-bottom: 20px;
+
+  font-weight: 600;
+}
+
+.patient-table table,
+.test-table table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 80, 150, 0.05);
+}
+
+.patient-table th,
+.patient-table td,
+.test-table th,
+.test-table td {
+  text-align: left;
+  padding: 5px;
+  font-size: 12px;
+  color: var(--hcolor);
+  position: relative;
+  padding-left: 10px;
+}
+
+.test-table th,
+.patient-table th {
+  background-color: #eaf3fb;
+  color: var(--hcolor);
+
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.test-table tbody tr td,
+.patient-table tbody tr td {
+  color: var(--hcolor);
+}
+.test-table tbody tr,
+.patient-table tbody tr {
+  text-transform: capitalize;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.test-table tbody tr:hover,
+.patient-table tbody tr:hover {
+  background-color: #f0f7ff;
+  transform: scale(1.01);
+  font-weight: 550;
+}
+.name-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--scolor);
+  color: var(--tcolor);
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  display: flex;
+}
+.patient-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+.title h3 {
+  font-size: 0.8rem;
+  padding-top: 6px;
+  font-style: italic;
+  color: var(--hcolor);
+  opacity: 0.4;
+}
+
+.patient-view-all {
+  font-size: 13px;
+  color: var(--scolor);
+  display: flex;
+  padding-top: 6px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.patient-view-all:hover {
+  color: var(--hcolor);
+  transform: translateX(5px);
+}

@@ -1,6 +1,7 @@
 import Test from "../models/Test.js";
 import Patient from "../models/Patient.js";
 import Lab from "../models/Lab.js";
+import { logActivity } from "../middleware/activityLogger.js";
 
 ///create New Test
 export const createNewTest = async (req, res) => {
@@ -39,12 +40,16 @@ export const createNewTest = async (req, res) => {
       await Patient.findByIdAndUpdate(patientId, {
         $push: { tests: newTest._id },
       });
+      await logActivity(
+        staffId,
+        labId,
+        `Added ${t.testName} Request `,
+        `Test Id ${testId}`,
+        req.ip
+      );
     }
     await lab.save();
 
-    // const populatedTest = await Test.findById(newTest._id)
-    //   .populate("patientId", "name")
-    //   .populate("labId", "name");
     res.json(creacteTests);
   } catch (err) {
     console.error(err);

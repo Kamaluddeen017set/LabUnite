@@ -1,0 +1,39 @@
+.check {
+  display: none;
+}
+
+.hamburger-button {
+  position: relative;
+  display: inline-block;
+  width: 1.8rem;
+  height: 1rem;
+  cursor: pointer;
+  position: absolute;
+  top: 4.5rem;
+  justify-self: center;
+  right: 0.001rem;
+  color: var(--tcolor);
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+  opacity: 70%;
+}
+.hamburger-button:hover {
+  opacity: 100%;
+  transform: translateY(-2px);
+}
+
+.hamburger-button div {
+  width: 1.2rem; /* match new button width */
+  height: 0.18rem; /* thinner lines (~3px) */
+  background-color: var(--tcolor);
+  opacity: 70%;
+  border-radius: 3px;
+  position: absolute;
+
+  transition: 0.4s;
+}
+
+/* Adjust hover transform distances proportionally */
+.hamburger-button:hover div {
+  width: 60%;
+}

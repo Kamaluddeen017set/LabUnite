@@ -1,0 +1,104 @@
+.activities {
+  display: flex;
+  margin-top: 6px;
+  padding: 5px;
+  background-color: var(--tcolor);
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border-radius: 8px;
+  max-height: 500px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scolor) var(--pcolor);
+}
+
+.activity {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: sans-serif;
+  color: #333;
+  background-color: var(--pcolor);
+  padding: 10px 5px;
+  border-radius: 8px;
+  border: 0.5px solid #44444430;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.05), 0 -1px 5px rgb(0, 0, 0, 0.05);
+  padding: 10px 15px;
+  transition: 0.7s;
+}
+.activity:hover {
+  transform: scale(1.1);
+}
+.activity-card h3 {
+  font-size: 0.7rem;
+  padding-top: 10px;
+}
+.activity-card .name {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+
+  gap: 60px;
+  color: var(--hcolor);
+  font-family: 'poppins';
+  text-transform: capitalize;
+  font-size: 13px;
+  opacity: 0.7;
+  text-transform: capitalize;
+}
+
+.activity .action {
+  text-transform: capitalize;
+  font-size: 0.7rem;
+  font-weight: 550;
+  opacity: 0.8;
+  max-width: 150px;
+}
+.activity .details {
+  padding-bottom: 10px;
+  font-size: 0.7rem;
+}
+
+.task-logo {
+  padding-top: 10px;
+}
+.task-logo svg {
+  padding: 5px;
+  display: block;
+  border-radius: 50%;
+  margin: 5px;
+  margin-left: 0;
+
+  font-size: 12px;
+  color: var(--ibcolor);
+  border: 0.5px solid var(--ibcolor);
+}
+.activity .date {
+  color: #444;
+  opacity: 0.5s;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+}
+.activity .staff-btn {
+  position: absolute;
+  right: 10px;
+  background-color: var(--tcolor);
+  padding: 5px;
+  border: none;
+  font-size: 11px;
+  color: var(--scolor);
+  box-shadow: var(--shadow2);
+  border-radius: 8px;
+  text-transform: lowercase;
+  border: 0.5px solid var(--pcolor);
+  transition: 0.5s;
+}
+.activity .staff-btn:hover {
+  box-shadow: -4px -4px 10px rgb(0, 0, 0, 0.08),
+    inset -4px -4px 5px rgb(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}

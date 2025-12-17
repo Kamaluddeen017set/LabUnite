@@ -10,6 +10,7 @@ import patientRoutes from "./routes/patientRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
 import testTempleteRoutes from "./routes/testTempleteRoutes.js";
 import pdfRouter from "./routes/pdf.route.js";
+import staffActivityRoutes from "./routes/activityRoutes.js";
 
 const app = express();
 const allowedOrigins = [
@@ -40,6 +41,7 @@ app.use("/api/patients", patientRoutes);
 app.use("/api/tests", testRoutes);
 app.use("/api/test-templetes", testTempleteRoutes);
 app.use("/official", pdfRouter);
+app.use("/api/activities", staffActivityRoutes);
 
 mongoose
   .connect(process.env.MONGO_URL)

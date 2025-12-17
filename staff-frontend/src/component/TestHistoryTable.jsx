@@ -81,31 +81,29 @@ function GeneralPatients({ query, setQuery, layoutstyle, filtered }) {
           </thead>
           <tbody className="table-animate">
             {filtered.length > 0 ? (
-              filtered
-                .reduce((acc, curr) => [curr, ...acc], [])
-                .map(patient => (
-                  <tr key={patient.patientId}>
-                    <td>{patient.patientId}</td>
-                    <td>{patient.name}</td>
-                    <td>{patient.phone}</td>
-                    <td>{patient.gender}</td>
-                    <td>{patient.age}</td>
-                    <td>{patient.address}</td>
+              filtered.map(patient => (
+                <tr key={patient.patientId}>
+                  <td>{patient.patientId}</td>
+                  <td>{patient.name}</td>
+                  <td>{patient.phone}</td>
+                  <td>{patient.gender}</td>
+                  <td>{patient.age}</td>
+                  <td>{patient.address}</td>
 
-                    <td>
-                      {
-                        <button
-                          className="view-btn"
-                          onClick={() =>
-                            (window.location.href = `/patient/${patient._id}`)
-                          }
-                        >
-                          Patient Details
-                        </button>
-                      }
-                    </td>
-                  </tr>
-                ))
+                  <td>
+                    {
+                      <button
+                        className="view-btn"
+                        onClick={() =>
+                          (window.location.href = `/patient/${patient._id}`)
+                        }
+                      >
+                        Patient Details
+                      </button>
+                    }
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td className="not-found">Patient not found</td>
@@ -150,26 +148,24 @@ function GeneralLabTest({ generalTest }) {
           </thead>
           <tbody className="table-animate">
             {filteredRequest.length > 0 ? (
-              filteredRequest
-                .reduce((acc, curr) => [curr, ...acc], [])
-                .map(pTest => (
-                  <tr key={pTest._id}>
-                    <td>{pTest.testName}</td>
-                    <td>{pTest.patientId.name}</td>
-                    <td>{pTest.testId}</td>
-                    <td>{pTest.status}</td>
-                    <td>
-                      <button
-                        className="view-btn"
-                        onClick={() =>
-                          (window.location.href = `/test/${pTest._id}`)
-                        }
-                      >
-                        Enroll
-                      </button>
-                    </td>
-                  </tr>
-                ))
+              filteredRequest.map(pTest => (
+                <tr key={pTest._id}>
+                  <td>{pTest.testName}</td>
+                  <td>{pTest.patientId.name}</td>
+                  <td>{pTest.testId}</td>
+                  <td>{pTest.status}</td>
+                  <td>
+                    <button
+                      className="view-btn"
+                      onClick={() =>
+                        (window.location.href = `/test/${pTest._id}`)
+                      }
+                    >
+                      Enroll
+                    </button>
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td className="not-found">No Request found</td>

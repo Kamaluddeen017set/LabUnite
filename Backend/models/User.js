@@ -7,8 +7,11 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     gender: { type: String },
+    age: { type: Number },
+    active: { type: Boolean, default: false },
     address: { type: String },
     phone: { String },
+    StaffId: { type: String, unique: true },
     role: {
       type: String,
       enum: ["superAdmin", "admin", "lab_scientist", "lab_technician"],

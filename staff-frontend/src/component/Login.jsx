@@ -34,13 +34,18 @@ export default function Login() {
         email,
         password,
       });
-
+      const user = res.data.user;
       console.log('RES', res.data);
 
       localStorage.setItem('userToken', res.data.token);
 
       localStorage.setItem('userId', JSON.stringify(res.data.user._id));
-      window.location.href = '/';
+
+      if (user.role === 'lab_technician' || user.role === 'lab_scientist') {
+        window.location.href = '/';
+      } else {
+        alert('Invalid User try again later');
+      }
     } catch (err) {
       if (err.response && err.response.data.message) {
         alert(err.response.data.message);

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { json } from "express";
 import Lab from "../models/Lab.js";
+import { logActivity } from "../middleware/activityLogger.js";
 
 ///generate token
 
@@ -48,6 +49,13 @@ export const registerPatient = async (req, res) => {
       staffId,
     });
 
+    await logActivity(
+      staffId,
+      labId,
+      "Register New Patient",
+      `Patient ID ${patientId}`,
+      req.ip
+    );
     res.status(201).json({
       message: "Patient registered successfully",
       token: generateToken(patient._id),
@@ -103,6 +111,7 @@ export const getPatientDetails = async (req, res) => {
         populate: { path: "staffId", select: "name role" },
       })
       .populate("staffId", "name role");
+
     if (!patient) return res.status(404).json({ message: "Patient not found" });
     res.json(patient);
   } catch (err) {
@@ -131,17 +140,17 @@ export const updateProfile = async (req, res) => {
   }
 };
 ///tests
-export const getSingleLabTests = async (req, res) => {
-  try {
-    const { labId } = req.params;
+// export const getSingleLabTests = async (req, res) => {
+//   try {
+//     const { labId } = req.params;
 
-    const tests = await Test.find({ labId });
+//     const tests = await Test.find({ labId });
 
-    res.status(200).json({ success: true, tests });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
+//     res.status(200).json({ success: true, tests });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
 ///passwoed update
 export const updatePassword = async (req, res) => {
   try {
