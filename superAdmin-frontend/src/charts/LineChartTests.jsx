@@ -37,7 +37,6 @@ export default function LineChartTests({ data }) {
           bottom: 25,
         }}
       >
-        {/* <CartesianGrid strokeDasharray="3 3" zIndex={0} /> */}
         <XAxis dataKey="name" />
         <YAxis width="auto" dataKey="Requests" />
         <Legend />

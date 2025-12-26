@@ -57,6 +57,22 @@ export const createNewTest = async (req, res) => {
   }
 };
 
+export const getAllTest = async (req, res) => {
+  try {
+    const tests = await Test.find()
+      .populate("patientId", "name")
+      .populate("labId", "name")
+      .populate("staffId", "name role");
+    res.json(tests);
+    if (!tests) {
+      return res.status(404).json({ message: "Tests not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching   tests:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const getSingleTest = async (req, res) => {
   try {
     const test = await Test.findOne({

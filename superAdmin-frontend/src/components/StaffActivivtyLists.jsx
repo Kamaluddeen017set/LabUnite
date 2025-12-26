@@ -27,7 +27,7 @@ export default function StaffActivity({ staffActivities, fetchLoaded }) {
 
 function Activity({ activity }) {
   let role;
-  if (activity.staffId.role === 'admin') role = '';
+  if (activity.staffId.role === 'receptionist') role = 'Rcp .';
   if (activity.staffId.role === 'lab_scientist') role = 'mlt .';
   if (activity.staffId.role === 'lab_technician') role = 'sci .';
   return (

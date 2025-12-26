@@ -7,7 +7,17 @@ import Lab from "../models/Lab.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role, labId } = req.body;
+    const {
+      name,
+      email,
+      password,
+      role,
+      labId,
+      phone,
+      dateOfBath,
+      address,
+      gender,
+    } = req.body;
 
     if (req.user.role === "admin" && role === "admin") {
       return res
@@ -15,6 +25,7 @@ export const registerUser = async (req, res) => {
         .json({ message: "Admins cannot create other admins" });
     }
     const exitingUser = await User.findOne({ email });
+
     if (exitingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -23,18 +34,23 @@ export const registerUser = async (req, res) => {
 
     lab.staffCounter += 1;
     await lab.save();
-
+    console.log(labId);
     //staff id
     const sequence = String(lab.staffCounter).padStart(4, "0");
-    const StaffId = `${lab.code}-S${sequence}`;
+    const staffId = `${lab.code}-S${sequence}`;
     const user = await User.create({
       name,
       email,
-      StaffId,
+      staffId,
       password,
       role,
       labId,
+      phone,
+      dateOfBath,
+      address,
+      gender,
     });
+    console.log(user);
     res
       .status(201)
       .json({ message: `${user.role} user registered successfully`, user });
@@ -45,9 +61,10 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { email, password } = req.body;
     //superADmin
-    console.log(req.body);
+
     if (email === process.env.SUPER_ADMIN_EMAIL) {
       if (password === process.env.SUPER_ADMIN_PASSWORD) {
         const token = jwt.sign(
@@ -55,12 +72,15 @@ export const loginUser = async (req, res) => {
           process.env.JWT_SECRET,
           { expiresIn: "7d" }
         );
-        const user = {
-          message: "Super admin loggeg in",
-          role: "superAdmin",
-          name: "DevKhamal",
-        };
-        res.json({ token, user });
+
+        return res.json({
+          token,
+          user: {
+            name: "DevKhamal",
+            role: "superAdmin",
+            message: "Super admin loggeg in",
+          },
+        });
       } else {
         return res
           .status(401)

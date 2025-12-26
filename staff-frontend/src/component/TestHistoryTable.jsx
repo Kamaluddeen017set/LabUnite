@@ -51,7 +51,7 @@ const TestHistoryTable = function ({ setGeneralPatients, generalPatients }) {
         layoutstyle={layoutstyle}
         filtered={filtered}
       />
-      <GeneralLabTest generalTest={generalTest} />
+      <GeneralLabTest generalTest={generalTest} currentUser={currentUser} />
     </div>
   );
 };
@@ -116,7 +116,7 @@ function GeneralPatients({ query, setQuery, layoutstyle, filtered }) {
   );
 }
 
-function GeneralLabTest({ generalTest }) {
+function GeneralLabTest({ generalTest, currentUser }) {
   const [testQuery, setTestQuery] = useState('');
 
   const pendingTests = generalTest.tests.filter(t => t.status === 'pending');
@@ -143,7 +143,7 @@ function GeneralLabTest({ generalTest }) {
               <th>Patient Name</th>
               <th>Test Id</th>
               <th>status</th>
-              <th>Action</th>
+              {currentUser.role !== 'receptionist' && <th>Action</th>}
             </tr>
           </thead>
           <tbody className="table-animate">
@@ -155,14 +155,16 @@ function GeneralLabTest({ generalTest }) {
                   <td>{pTest.testId}</td>
                   <td>{pTest.status}</td>
                   <td>
-                    <button
-                      className="view-btn"
-                      onClick={() =>
-                        (window.location.href = `/test/${pTest._id}`)
-                      }
-                    >
-                      Enroll
-                    </button>
+                    {currentUser.role !== 'receptionist' && (
+                      <button
+                        className="view-btn"
+                        onClick={() =>
+                          (window.location.href = `/test/${pTest._id}`)
+                        }
+                      >
+                        Enroll
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))

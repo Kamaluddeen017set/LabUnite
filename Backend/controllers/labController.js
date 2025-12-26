@@ -39,6 +39,32 @@ export const getSingleLabPatients = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export const getLabPatientsToday = async (req, res) => {
+  const { start, end } = req.query;
+  const { labId } = req.params;
+  console.log(req.query);
+  console.log(req.params);
+  if ((!start, !end)) {
+    return res.status(400).json({
+      success: false,
+      message: " Current Date are Required",
+    });
+  }
+  const patients = await Patient.find({
+    labId,
+    createdAt: {
+      $gte: new Date(start),
+      $lte: new Date(end + "T23:59:59"),
+    },
+  })
+    .populate("patientId", "name age gender patientId phone address")
+    .populate("labId", "name")
+    .populate("staffId", "name role")
+    .sort({ createdAt: -1 });
+  res.json({ success: true, patients });
+};
+
 export const createLab = async (req, res) => {
   try {
     const { name, email, address, phone } = req.body;
@@ -88,6 +114,32 @@ export const getSingleLabTests = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+//single lab today tests
+export const getLabTestsToday = async (req, res) => {
+  const { start, end } = req.query;
+  const { labId } = req.params;
+  console.log(req.query);
+  console.log(req.params);
+  if ((!start, !end)) {
+    return res.status(400).json({
+      success: false,
+      message: " Current Date are Required",
+    });
+  }
+  const tests = await Test.find({
+    labId,
+    createdAt: {
+      $gte: new Date(start),
+      $lte: new Date(end + "T23:59:59"),
+    },
+  })
+    .populate("patientId", "name age gender patientId phone address")
+    .populate("labId", "name")
+    .populate("staffId", "name role")
+    .sort({ createdAt: -1 });
+  res.json({ success: true, tests });
+};
+
 ///lab stafff
 export const getSingleLabStaff = async (req, res) => {
   try {

@@ -13,12 +13,12 @@ const router = express.Router();
 router.post("/create", auth(["admin", "SuperAdmin"]), creacteTestTemplete);
 router.get(
   "/",
-  auth(["patient", "admin", "lab_technician", "lab_scientist"]),
+  auth(["patient", "admin", "lab_technician", "lab_scientist", "receptionist"]),
   getAllTestTemplete
 );
 router.get(
   "/:labId/:id",
-  auth(["patient", "admin", "lab_technician", "lab_scientist"]),
+  auth(["patient", "admin", "lab_technician", "lab_scientist", "receptionist"]),
   getSingleTestTemplete
 );
 router.put("/:id", auth(["admin", "SuperAdmin"]), updateTestTemplete);

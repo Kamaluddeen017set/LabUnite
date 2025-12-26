@@ -18,19 +18,16 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { faSignOut } from '@fortawesome/free-solid-svg-icons/faSignOut';
 export default function AdminSlider() {
-  const { setIsOpen, createPatient, isLoaded, isOpen } = useApp();
+  const { setIsOpen, createPatient, createStaff, isLoaded, isOpen } = useApp();
   function handleClick() {
     setIsOpen(!isOpen);
   }
   return (
     <div
       className="slider "
-      style={
-        {
-          // width: isOpen ? "5%" : "12%",
-          // filter: createPatient ? "blur(10px)" : "none",
-        }
-      }
+      style={{
+        filter: createPatient || createStaff ? 'blur(10px)' : 'none',
+      }}
     >
       <MenuIcon handleClick={handleClick} isOpen={isOpen} />
       <Menu isOpen={isOpen} />

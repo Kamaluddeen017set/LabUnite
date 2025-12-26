@@ -14,7 +14,8 @@ export default function Home() {
   }
   if (
     currentUser.role === 'lab_technician' ||
-    currentUser.role === 'lab_scientist'
+    currentUser.role === 'lab_scientist' ||
+    currentUser.role === 'receptionist'
   ) {
     return <StaffDashboud />;
   } else {

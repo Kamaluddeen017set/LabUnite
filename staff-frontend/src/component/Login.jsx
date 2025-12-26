@@ -41,7 +41,11 @@ export default function Login() {
 
       localStorage.setItem('userId', JSON.stringify(res.data.user._id));
 
-      if (user.role === 'lab_technician' || user.role === 'lab_scientist') {
+      if (
+        user.role === 'lab_technician' ||
+        user.role === 'lab_scientist' ||
+        user.role === 'receptionist'
+      ) {
         window.location.href = '/';
       } else {
         alert('Invalid User try again later');

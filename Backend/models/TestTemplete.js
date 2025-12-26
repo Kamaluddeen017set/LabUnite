@@ -14,6 +14,8 @@ const testTempleteSchema = new mongoose.Schema(
     singleUnit: { type: String, default: "" },
     singleReferenceRange: { type: String, default: "" },
     parameters: [fieldSchema],
+    sample: { type: String, required: true },
+    price: { type: Number, required: true },
     labId: { type: mongoose.Schema.Types.ObjectId, ref: "Lab" },
     staffId: {
       type: mongoose.Schema.Types.ObjectId,

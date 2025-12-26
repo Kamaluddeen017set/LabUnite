@@ -8,9 +8,11 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import PatientProfile from './PatientProfile';
 import { useParams } from 'next/navigation';
 import '../styles/TestTable.css';
+import { useApp } from '../app/context/appContext';
 export default function PatientPage({ openModel, setModel }) {
   const [patientDetails, setPatientDetails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { currentUser } = useApp();
   const { id } = useParams();
   console.log(id);
 
@@ -28,7 +30,7 @@ export default function PatientPage({ openModel, setModel }) {
     };
     fetchData();
   }, [id]);
-  if (loading) return <p>Loading...</p>;
+  if (loading && !currentUser) return <p>Loading...</p>;
 
   return (
     <div
@@ -40,12 +42,16 @@ export default function PatientPage({ openModel, setModel }) {
         path="/"
         navigateTo="Back to Dashboud"
       />
-      <PatientTestSection patientDetails={patientDetails} setModel={setModel} />
+      <PatientTestSection
+        patientDetails={patientDetails}
+        setModel={setModel}
+        currentUser={currentUser}
+      />
     </div>
   );
 }
 
-function PatientTestSection({ patientDetails, setModel }) {
+function PatientTestSection({ patientDetails, setModel, currentUser }) {
   console.log(patientDetails);
   const handleViewPdf = (labId, id) => {
     const url = `http://localhost:5000/official/${labId}/report/${id}/pdf`;
@@ -87,19 +93,20 @@ function PatientTestSection({ patientDetails, setModel }) {
                         {test.status}
                       </span>
                     </td>
-                    <td>{test.createdAt}</td>
+                    <td>{new Date(test.createdAt).toLocaleString()}</td>
                     <td>{test.result}</td>
                     <td>
-                      {test.status === 'pending' && (
-                        <button
-                          className="view-btn"
-                          onClick={() =>
-                            (window.location.href = `/test/${test._id}`)
-                          }
-                        >
-                          Upload result
-                        </button>
-                      )}
+                      {test.status === 'pending' &&
+                        currentUser.role !== 'receptionist' && (
+                          <button
+                            className="view-btn"
+                            onClick={() =>
+                              (window.location.href = `/test/${test._id}`)
+                            }
+                          >
+                            Upload result
+                          </button>
+                        )}
                       {test.status === 'completed' && (
                         <button
                           className="view-btn"

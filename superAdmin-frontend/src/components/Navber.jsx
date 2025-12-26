@@ -1,7 +1,7 @@
-"use client";
-import ProfileImage from "./ProfileImage";
-import { useApp } from "../app/context/appContext";
-import Logo from "./Logo";
+'use client';
+import ProfileImage from './ProfileImage';
+import { useApp } from '../app/context/appContext';
+import Logo from './Logo';
 export default function Navber() {
   const {
     currentUser,
@@ -10,6 +10,7 @@ export default function Navber() {
     isLoaded,
     isOpen,
     profileImage,
+    createStaff,
   } = useApp();
 
   if (!isLoaded || loading) {
@@ -27,7 +28,7 @@ export default function Navber() {
   const layoutstyle = {
     // width: "99%",
 
-    filter: createPatient ? "blur(10px)" : "none",
+    filter: createPatient || createStaff ? 'blur(10px)' : 'none',
   };
   return (
     <div className="nav" style={layoutstyle}>
@@ -47,14 +48,14 @@ function Icons({ user, profileImage }) {
       <Notification />
       <h6
         style={{
-          fontSize: "1rem",
-          textTransform: "uppercase",
-          fontFamily: "poppins",
-          color: "#444",
-          marginTop: "15px",
+          fontSize: '1rem',
+          textTransform: 'uppercase',
+          fontFamily: 'poppins',
+          color: '#444',
+          marginTop: '15px',
         }}
       >
-        {user.name.split(" ")[0]}
+        {user.name.split(' ')[0]}
       </h6>
       <ProfileImage
         profileImage={profileImage}

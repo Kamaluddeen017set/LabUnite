@@ -67,8 +67,12 @@ function Notification() {
 }
 
 function WelcomeMessage({ user }) {
-  let role = `lab ${user.role.slice(4)}`;
-  if (user.role === 'admin') role = 'lab manager';
+  let role;
+  if (user.role.startsWith('lab')) {
+    role = `lab ${user.role.slice(4)}`;
+  } else {
+    role = 'Receptionist';
+  }
 
   return (
     <div className="welcome-message">

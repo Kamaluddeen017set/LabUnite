@@ -19,7 +19,7 @@ export default function Hero({ generalPatients }) {
   useEffect(() => {
     const fetchResults = async () => {
       const labId = currentUser.labId._id;
-      console.log('isddd', labId);
+
       try {
         const res = await axiosInstance.get(`/labs/${labId}/tests`);
 

@@ -6,7 +6,7 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [createPatient, setCreatePatient] = useState(false);
   const [createStaff, setCreateStaff] = useState(false);
@@ -15,8 +15,10 @@ export function AppProvider({ children }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [token, setToken] = useState(null);
   const [fetchLoaded, setFetchLoaded] = useState(false);
-  const [generalPatients, setGeneralPatients] = useState();
-  const [generalTests, setGeneralTests] = useState();
+  const [generalPatients, setGeneralPatients] = useState([]);
+  const [generalTests, setGeneralTests] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [activeDay, setActiveDay] = useState(new Date().getDate());
 
   useEffect(() => {
     const adminStrongToken =
@@ -68,7 +70,6 @@ export function AppProvider({ children }) {
     fetchUser();
   }, []);
 
-
   return (
     <AppContext.Provider
       value={{
@@ -89,6 +90,10 @@ export function AppProvider({ children }) {
         generalPatients,
         generalTests,
         fetchLoaded,
+        currentDate,
+        setCurrentDate,
+        activeDay,
+        setActiveDay,
       }}
     >
       {children}

@@ -9,11 +9,12 @@ import { useEffect, useRef, useState } from 'react';
 import '../styles/Calendar.css';
 import axiosInstance from '../axiosInstance';
 import StaffActivity from './StaffActivivtyLists';
+import { useApp } from '../app/context/appContext';
 export default function Calender() {
-  const today = new Date();
-  const [currentDate, SetCurrentDate] = useState(today);
+  const { activeDay, setActiveDay, currentDate, setCurrentDate } = useApp();
+
   const [fetchLoaded, setFetchLoaded] = useState(false);
-  const [activeDay, setActiveDay] = useState(today.getDate());
+
   const [refreshKey, setRefreshKey] = useState(0);
   const [staffActivities, setStaffActivities] = useState([]);
   const scrollRef = useRef(null);
@@ -79,11 +80,11 @@ export default function Calender() {
   const handleTouchEnd = e => {
     const endX = e.changedTouches[0].clientX;
     if (startX - endX > 50) {
-      SetCurrentDate(
+      setCurrentDate(
         new Date(currentDate.setMonth(currentDate.getMonth() + 1))
       );
     } else if (endX - startX > 50) {
-      SetCurrentDate(
+      setCurrentDate(
         new Date(currentDate.setMonth(currentDate.getMonth() - 1))
       );
     }
@@ -104,7 +105,7 @@ export default function Calender() {
             className="left"
             icon={faChevronLeft}
             onClick={() =>
-              SetCurrentDate(
+              setCurrentDate(
                 new Date(currentDate.setMonth(currentDate.getMonth() - 1))
               )
             }
@@ -113,7 +114,7 @@ export default function Calender() {
             className="right"
             icon={faChevronRight}
             onClick={() =>
-              SetCurrentDate(
+              setCurrentDate(
                 new Date(currentDate.setMonth(currentDate.getMonth() + 1))
               )
             }
@@ -153,7 +154,7 @@ export default function Calender() {
         className="refresh-btn"
         onClick={() => {
           const today = new Date();
-          SetCurrentDate(today);
+          setCurrentDate(today);
 
           setActiveDay(today.getDate());
           setRefreshKey(prev => prev + 2);

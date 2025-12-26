@@ -3,11 +3,17 @@ import { useApp } from '../app/context/appContext';
 import '../styles/WelcomeCard.css';
 import { faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons';
 
-export default function WelcomeCard() {
+export default function WelcomeCard({ generalTests, date, today }) {
+  console.log('from welcome', generalTests);
   const { currentUser, isLoaded, loading } = useApp();
   const time = new Date().toLocaleTimeString();
   const day = time.slice(8).toLowerCase().trim();
   const user = currentUser;
+  let num = '';
+  if (date === today) {
+    num = generalTests?.tests?.length;
+  }
+  console.log('herer', generalTests?.tests);
 
   let greeting;
   if (day == 'am') {
@@ -38,12 +44,17 @@ export default function WelcomeCard() {
               <FontAwesomeIcon icon={faNewspaper} />
             </span>
           </div>
-          <div className="info">
-            <span className="count">12</span>
-            <span className="label">Today Requests</span>
-          </div>
+          {num > -1 && (
+            <div className="info">
+              <span className="count">{num}</span>
+              <span className="label">Today Requests</span>
+            </div>
+          )}
 
-          <button className="view">
+          <button
+            className="view"
+            onClick={() => (window.location.href = '%Lab%Admin%/ResultsPage')}
+          >
             <FontAwesomeIcon icon={faUser} />
             View Requests
           </button>

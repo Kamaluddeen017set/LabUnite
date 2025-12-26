@@ -6,7 +6,7 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [createPatient, setCreatePatient] = useState(false);
   const [profileImage, setProfileImage] = useState('./kamalprofileImage.jpg');
@@ -30,7 +30,8 @@ export function AppProvider({ children }) {
         const res = await axiosInstance.get(`/users/${userId}`);
         if (
           res.data.role === 'lab_technician' ||
-          res.data.role === 'lab_scientist'
+          res.data.role === 'lab_scientist' ||
+          res.data.role === 'receptionist'
         ) {
           setCurrentUser(res.data);
           const date = new Date();
@@ -48,6 +49,7 @@ export function AppProvider({ children }) {
     }
     fetchUser();
   }, []);
+
   return (
     <AppContext.Provider
       value={{

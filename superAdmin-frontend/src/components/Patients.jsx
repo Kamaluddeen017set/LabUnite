@@ -13,10 +13,11 @@ import {
   faChevronRight,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import AddPatientForm from './AddPatientForm';
 export default function Patients() {
   const [generalPatients, setGeneralPatients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { isOpen } = useApp();
+  const { isOpen, setCreatePatient, createPatient } = useApp();
   const layoutstyle = {
     paddingLeft: isOpen ? '80px' : '200px',
     paddingTop: '60px',
@@ -40,12 +41,17 @@ export default function Patients() {
   if (loading) return <div>loading...</div>;
   return (
     <div style={layoutstyle}>
-      <PatientTable data={generalPatients} />
+      {createPatient && <AddPatientForm />}
+      <PatientTable
+        data={generalPatients}
+        setCreatePatient={setCreatePatient}
+        createPatient={createPatient}
+      />
     </div>
   );
 }
 
-function PatientTable({ data }) {
+function PatientTable({ data, setCreatePatient, createPatient }) {
   const [query, setQuery] = useState('');
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,7 +75,10 @@ function PatientTable({ data }) {
   }, [query]);
 
   return (
-    <div className="general-patients">
+    <div
+      className="general-patients"
+      style={{ filter: createPatient ? 'blur(10px)' : 'none' }}
+    >
       <h1>Patients</h1>
       <div className="option">
         <Search
@@ -77,7 +86,7 @@ function PatientTable({ data }) {
           setQuery={setQuery}
           placeholder="Search Patient..."
         />
-        <button className="add-patient">
+        <button className="add-patient" onClick={() => setCreatePatient(true)}>
           <FontAwesomeIcon icon={faPlus} /> Add Patient
         </button>
       </div>
@@ -100,43 +109,40 @@ function PatientTable({ data }) {
 
           <tbody className="table-animate">
             {paginatedData.length > 0 ? (
-              paginatedData
-                .slice()
-                .reverse()
-                .map(patient => (
-                  <tr key={patient.patientId} className="table-row">
-                    <td className="patient-cell">
-                      <div className="avatar">{patient.name.charAt(0)}</div>
-                      <span>{patient.name}</span>
-                    </td>
+              paginatedData.slice().map(patient => (
+                <tr key={patient.patientId} className="table-row">
+                  <td className="patient-cell">
+                    <div className="avatar">{patient.name.charAt(0)}</div>
+                    <span>{patient.name}</span>
+                  </td>
 
-                    <td>{patient.patientId}</td>
-                    <td>{patient.gender}</td>
-                    <td>{patient.age}</td>
-                    <td>{patient.phone}</td>
+                  <td>{patient.patientId}</td>
+                  <td>{patient.gender}</td>
+                  <td>{patient.age}</td>
+                  <td>{patient.phone}</td>
 
-                    <td>
-                      <span
-                        className={`status ${
-                          patient.active ? 'Active' : 'inactive'
-                        }`}
-                      >
-                        {patient.active ? 'Active' : 'Inactive'}
-                      </span>
-                    </td>
+                  <td>
+                    <span
+                      className={`status ${
+                        patient.active ? 'Active' : 'inactive'
+                      }`}
+                    >
+                      {patient.active ? 'Active' : 'Inactive'}
+                    </span>
+                  </td>
 
-                    <td>
-                      <button
-                        className="view-btn"
-                        onClick={() =>
-                          (window.location.href = `/patient/${patient._id}`)
-                        }
-                      >
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                  <td>
+                    <button
+                      className="view-btn"
+                      onClick={() =>
+                        (window.location.href = `/patient/${patient._id}`)
+                      }
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td colSpan="7" className="not-found">

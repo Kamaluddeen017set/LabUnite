@@ -15,27 +15,38 @@ const router = express.Router();
 router.post("/register", auth(["superAdmin", "admin"]), registerUser);
 
 //login user
-router.post("/login", loginUser);
+router.post(
+  "/login",
+
+  loginUser
+);
 //get single user
 router.put(
   "/update-profile",
-  auth(["patient", "admin", "lab_technician", "lab_scientist"]),
+  auth(["patient", "admin", "lab_technician", "lab_scientist", "receptionist"]),
   updateProfile
 );
 
 router.put(
   "/update-password",
-  auth(["patient", "admin", "lab_technician", "lab_scientist"]),
+  auth(["patient", "admin", "lab_technician", "lab_scientist", "receptionist"]),
   updatePassword
 );
 router.get(
   "/:id",
-  auth(["patient", "superAdmin", "admin", "lab_technician", "lab_scientist"]),
+  auth([
+    "patient",
+    "superAdmin",
+    "admin",
+    "lab_technician",
+    "lab_scientist",
+    "receptionist",
+  ]),
   getUserDetails
 );
 router.get(
   "/:staffId/patients",
-  auth(["admin", "lab_technician", "lab_scientist"]),
+  auth(["admin", "lab_technician", "lab_scientist", "receptionist"]),
   getSingleUserPatients
 );
 export default router;

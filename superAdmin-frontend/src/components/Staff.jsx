@@ -14,10 +14,11 @@ import {
   faPlus,
   faUserDoctor,
 } from '@fortawesome/free-solid-svg-icons';
+import AddStaff from './AddStaff';
 export default function Patients() {
   const [generalStaffs, setGeneralStaffs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { isOpen } = useApp();
+  const { isOpen, createStaff, setCreateStaff } = useApp();
   const layoutstyle = {
     paddingLeft: isOpen ? '80px' : '200px',
     paddingTop: '60px',
@@ -41,12 +42,17 @@ export default function Patients() {
   if (loading) return <div>loading...</div>;
   return (
     <div style={layoutstyle}>
-      <PatientTable data={generalStaffs} />
+      {createStaff && <AddStaff />}
+      <PatientTable
+        data={generalStaffs}
+        setCreateStaff={setCreateStaff}
+        createStaff={createStaff}
+      />
     </div>
   );
 }
 
-function PatientTable({ data }) {
+function PatientTable({ data, setCreateStaff, createStaff }) {
   const [query, setQuery] = useState('');
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,7 +76,10 @@ function PatientTable({ data }) {
   }, [query]);
 
   return (
-    <div className="general-staff">
+    <div
+      className="general-staff"
+      style={{ filter: createStaff ? 'blur(10px)' : 'none' }}
+    >
       <h1>Staffs</h1>
       <div className="option">
         <Search
@@ -78,7 +87,7 @@ function PatientTable({ data }) {
           setQuery={setQuery}
           placeholder="Search Staff..."
         />
-        <button className="add-staff">
+        <button className="add-staff" onClick={() => setCreateStaff(true)}>
           <FontAwesomeIcon icon={faPlus} /> Add Staff
         </button>
       </div>
@@ -114,9 +123,11 @@ function PatientTable({ data }) {
                   <td>
                     {staff.role === 'lab_technician'
                       ? 'Technician'
-                      : 'Scientist'}
+                      : staff.role === 'lab_scientist'
+                      ? 'Scientist'
+                      : 'Receptionist'}
                   </td>
-                  <td>{staff.staffId || 'AD-S0205'}</td>
+                  <td>{staff.staffId}</td>
                   <td>{staff.gender}</td>
                   <td>{staff.address || '-'}</td>
                   <td>{staff.phone || '-'}</td>
@@ -124,7 +135,7 @@ function PatientTable({ data }) {
                   <td>
                     <span
                       className={`status ${
-                        staff.activess ? 'Active' : 'inactive'
+                        staff.active ? 'Active' : 'inactive'
                       }`}
                     >
                       {staff.active ? 'Active' : 'Inactive'}
@@ -135,7 +146,7 @@ function PatientTable({ data }) {
                     <button
                       className="view-btn"
                       onClick={() =>
-                        (window.location.href = `/patient/${staff._id}`)
+                        (window.location.href = `/%Lab%Admin%/Staffs/${staff._id}`)
                       }
                     >
                       View

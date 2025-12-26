@@ -1,0 +1,32 @@
+.main-card {
+}
+.staff-details {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding-top: 80px;
+}
+
+.container1 {
+  grid-area: 1 / 1 / 5 / 9;
+}
+.container2 {
+  grid-area: 5 / 1 / 7 / 3;
+}
+.container3 {
+  grid-area: 5 / 3 / 7 / 5;
+}
+.container4 {
+  grid-area: 5 / 5 / 7 / 7;
+}
+.container5 {
+  grid-area: 5 / 7 / 7 / 9;
+}
+.container6 {
+  grid-area: 7 / 1 / 13 / 4;
+}
+.container7 {
+  grid-area: 7 / 4 / 13 / 9;
+}
